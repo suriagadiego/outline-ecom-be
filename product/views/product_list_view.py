@@ -18,8 +18,9 @@ def custom_permission_classes(permissions):
     return decorator
 
 
+# @custom_permission_classes([IsAuthenticated, IsAdminUser])
 @api_view(["GET"])
-@custom_permission_classes([IsAuthenticated, IsAdminUser])
+@permission_classes([IsAuthenticated])
 def list_all_products(request):
     products = Product.objects.all()
     serializer = ProductSerializer(products, many=True)
