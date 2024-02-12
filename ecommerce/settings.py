@@ -25,7 +25,13 @@ SECRET_KEY = "django-insecure-3rl&mi!a*)!8=4+*$!5b^4!cz+-eof4p5_dd81!ura@d*xuv4%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'outline-ecom-be-production.up.railway.app',
+    # Add any other valid hostnames here
+]
+
 
 
 # Application definition
