@@ -11,4 +11,10 @@ from ..serializers import (
 def get_product_by_uuid(request, product_uuid):
     product = get_object_or_404(Product, uuid=product_uuid)
     result = ProductSerializer(product, many=False).data
-    return Response({"message": result})
+    return Response({"data": result})
+
+@api_view(["GET"])
+def get_product_by_id(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    result = ProductSerializer(product, many=False).data
+    return Response({"data": result})
