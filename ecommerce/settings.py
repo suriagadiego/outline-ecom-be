@@ -29,6 +29,7 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     'outline-ecom-be-production.up.railway.app',
+    'react-frontend-production-54c1.up.railway.app'
     # Add any other valid hostnames here
 ]
 
