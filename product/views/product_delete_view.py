@@ -1,13 +1,29 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 from ..models import Product
 from ..serializers import (
     ProductSerializer,
 )
 
+def custom_permission_classes(permissions):
+    def decorator(view_func):
+        def wrapped_view(request, *args, **kwargs):
+            if not request.user.is_authenticated:
+                # If the user is not authenticated, return a custom error response
+                return Response({"error": True, "detail": "Authentication credentials were not provided."}, status=401)
+            return view_func(request, *args, **kwargs)
+        return wrapped_view
+    return decorator
+
+
+
+
+
 @api_view(["DELETE"])
+@custom_permission_classes([IsAuthenticated, IsAdminUser])
 def delete_product(request, product_uuid):
     product = Product.objects.filter(uuid=product_uuid).first()
     

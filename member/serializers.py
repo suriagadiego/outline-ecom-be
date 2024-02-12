@@ -11,8 +11,12 @@ class MemberSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         password = validated_data.pop('password', None)
+        is_superuser = validated_data.pop('is_superuser', False)
         instance = self.Meta.model(**validated_data)
         if password is not None:
             instance.set_password(password)
+        if is_superuser:
+            instance.is_superuser = True
+            instance.role = Member.MemberRole.ADMIN 
         instance.save()
         return instance
